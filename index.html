@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProvenStack AI — SaaS Ideas That Already Make Money</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://www.paypal.com/sdk/js?client-id=BAA1VQiKRs6ZtM7qtyIKg6fMaD5DSQmMJ4VXO7nT_3eocVPOTViK9RcELQqWdGSNkz69IhvEi-u_Hw-9ck&currency=USD&intent=capture"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#07090C;
+  --surface:#0D1117;
+  --card:#131920;
+  --card2:#171E26;
+  --border:#1C2530;
+  --border-lt:#253040;
+  --green:#00D084;
+  --green-dim:rgba(0,208,132,.1);
+  --blue:#3B82F6;
+  --blue-dim:rgba(59,130,246,.1);
+  --amber:#F59E0B;
+  --amber-dim:rgba(245,158,11,.1);
+  --red:#EF4444;
+  --purple:#8B5CF6;
+  --purple-dim:rgba(139,92,246,.1);
+  --text:#DDE4ED;
+  --muted:#4A5E70;
+  --muted-lt:#6B7E90;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--void);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* ── LAYOUT ── */
+.app-shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+@media(max-width:900px){.app-shell{grid-template-columns:1fr}}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+@media(max-width:900px){.sidebar{display:none}}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.logo-text{font-family:'DM Mono',monospace;font-size:.9rem;color:var(--green);font-weight:500;letter-spacing:.04em}
+.logo-sub{font-size:.72rem;color:var(--muted);margin-top:3px}
+.sidebar-section{padding:0 12px;margin-bottom:8px}
+.sidebar-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:0 8px;margin-bottom:6px}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:4px;cursor:pointer;font-size:.85rem;color:var(--muted-lt);transition:all .15s;text-decoration:none;border:none;background:none;width:100%;text-align:left}
+.sidebar-item:hover,.sidebar-item.active{background:var(--card);color:var(--text)}
+.sidebar-item .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dot-green{background:var(--green)}
+.dot-blue{background:var(--blue)}
+.dot-amber{background:var(--amber)}
+.dot-purple{background:var(--purple)}
+.dot-red{background:var(--red)}
+.sidebar-footer{margin-top:auto;padding:16px 20px;border-top:1px solid var(--border)}
+.sidebar-footer p{font-size:.75rem;color:var(--muted);line-height:1.6}
+.sidebar-footer a{color:var(--green);text-decoration:none;font-family:'DM Mono',monospace;font-size:.72rem}
+
+/* ── MAIN ── */
+.main{overflow-y:auto}
+
+/* ── TOP BAR ── */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:50;gap:16px;flex-wrap:wrap}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.mobile-logo{font-family:'DM Mono',monospace;font-size:.85rem;color:var(--green);display:none}
+@media(max-width:900px){.mobile-logo{display:block}}
+.search-wrap{position:relative}
+.search-wrap input{background:var(--card);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:8px 14px 8px 32px;width:220px;transition:border-color .2s}
+.search-wrap input:focus{outline:none;border-color:var(--green)}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.tier-badge{font-family:'DM Mono',monospace;font-size:.7rem;padding:4px 10px;border-radius:3px;letter-spacing:.06em}
+.tier-free{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.tier-pro{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,208,132,.2)}
+.upgrade-btn{font-family:'DM Mono',monospace;font-size:.75rem;padding:8px 16px;border-radius:3px;background:var(--green);color:var(--void);text-decoration:none;font-weight:500;transition:opacity .2s;border:none;cursor:pointer}
+.upgrade-btn:hover{opacity:.85}
+
+/* ── CONTENT ── */
+.content{padding:28px 32px}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:28px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:16px 18px}
+.stat-val{font-family:'DM Serif Display',serif;font-size:1.8rem;line-height:1;margin-bottom:4px}
+.stat-label{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.stat-change{font-size:.75rem;margin-top:4px}
+.up{color:var(--green)}.down{color:var(--red)}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.filter-btn{font-family:'DM Mono',monospace;font-size:.72rem;padding:6px 14px;border-radius:3px;border:1px solid var(--border);color:var(--muted-lt);background:transparent;cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.filter-btn:hover,.filter-btn.active{background:var(--card2);border-color:var(--border-lt);color:var(--text)}
+.filter-btn.active{border-color:var(--green);color:var(--green)}
+
+/* ── IDEA CARDS ── */
+.ideas-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:24px}
+.idea-card{background:var(--card);padding:20px 24px;transition:background .15s;cursor:pointer;position:relative}
+.idea-card:hover{background:var(--card2)}
+.idea-card.locked{filter:none}
+.idea-card.locked .idea-desc,.idea-card.locked .idea-meta,.idea-card.locked .idea-tools{filter:blur(5px);user-select:none;pointer-events:none}
+.lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(7,9,12,.5);backdrop-filter:blur(1px);border-radius:0}
+.lock-badge{background:var(--card2);border:1px solid var(--border-lt);border-radius:4px;padding:10px 20px;font-family:'DM Mono',monospace;font-size:.75rem;color:var(--amber);text-align:center;cursor:pointer}
+.lock-badge span{display:block;font-size:.65rem;color:var(--muted);margin-top:3px}
+
+.idea-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.idea-title{font-weight:600;font-size:1rem;color:var(--text)}
+.idea-badges{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.badge{font-family:'DM Mono',monospace;font-size:.65rem;padding:3px 8px;border-radius:2px;letter-spacing:.06em;white-space:nowrap}
+.badge-mrr{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,208,132,.2)}
+.badge-diff{padding:3px 8px}
+.diff-easy{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,208,132,.2)}
+.diff-medium{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.diff-hard{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.badge-niche{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(59,130,246,.2)}
+.badge-global{background:var(--purple-dim);color:var(--purple);border:1px solid rgba(139,92,246,.2)}
+
+.idea-desc{font-size:.88rem;color:var(--muted-lt);line-height:1.65;margin-bottom:12px}
+.idea-meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px}
+.meta-item{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.06em}
+.meta-item strong{color:var(--muted-lt)}
+.idea-tools{display:flex;gap:6px;flex-wrap:wrap}
+.idea-tool{font-family:'DM Mono',monospace;font-size:.65rem;padding:3px 9px;border-radius:2px;background:var(--card2);color:var(--muted-lt);border:1px solid var(--border);text-decoration:none;transition:all .15s}
+.idea-tool:hover{border-color:var(--green);color:var(--green)}
+
+/* ── PAYWALL ── */
+.paywall-card{background:var(--card);border:1px solid var(--amber);border-radius:6px;padding:36px;text-align:center;margin-bottom:24px}
+.paywall-icon{font-size:2.5rem;margin-bottom:16px}
+.paywall-title{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:8px}
+.paywall-sub{font-size:.9rem;color:var(--muted-lt);max-width:420px;margin:0 auto 24px;line-height:1.65}
+.paywall-price{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted);margin-bottom:20px}
+.paywall-price strong{font-size:2rem;font-family:'DM Serif Display',serif;color:var(--text);display:block;margin-bottom:4px}
+.paywall-includes{list-style:none;text-align:left;max-width:360px;margin:0 auto 28px}
+.paywall-includes li{font-size:.85rem;color:var(--muted-lt);padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.paywall-includes li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+#pp-unlock{max-width:360px;margin:0 auto}
+
+/* ── AI GENERATOR ── */
+.ai-section{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:28px;margin-bottom:24px}
+.ai-title{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.ai-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:600px){.ai-form{grid-template-columns:1fr}}
+.ai-form input,.ai-form select{background:var(--card);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:9px 12px;width:100%}
+.ai-form input:focus,.ai-form select:focus{outline:none;border-color:var(--green)}
+.ai-form select option{background:var(--card)}
+.ai-generate-btn{grid-column:1/-1;font-family:'DM Mono',monospace;font-size:.8rem;padding:11px;border:none;border-radius:3px;background:var(--green);color:var(--void);cursor:pointer;font-weight:500;transition:opacity .2s;letter-spacing:.04em}
+.ai-generate-btn:hover{opacity:.85}
+.ai-generate-btn:disabled{opacity:.4;cursor:not-allowed}
+.ai-output{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:20px;font-size:.88rem;color:var(--text);line-height:1.75;white-space:pre-wrap;display:none;margin-top:12px}
+.ai-loading{text-align:center;padding:20px;display:none;font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted-lt)}
+.ai-dots{color:var(--green);animation:blink 1.2s infinite;font-size:1.2rem;display:block;letter-spacing:.3em}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ── AFFILIATE SECTION ── */
+.aff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.aff-card{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:18px;transition:border-color .15s}
+.aff-card:hover{border-color:var(--green)}
+.aff-cat{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.aff-name{font-weight:600;font-size:.9rem;color:var(--green);margin-bottom:5px}
+.aff-desc{font-size:.8rem;color:var(--muted-lt);line-height:1.5;margin-bottom:10px}
+.aff-link{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--green);text-decoration:none}
+.aff-link:hover{text-decoration:underline}
+
+/* ── DCC PRODUCTS ── */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:24px}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:20px;position:relative;overflow:hidden}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.product-card.green::before{background:var(--green)}
+.product-card.blue::before{background:var(--blue)}
+.product-card.amber::before{background:var(--amber)}
+.product-name{font-weight:600;font-size:.95rem;margin-bottom:6px}
+.product-desc{font-size:.82rem;color:var(--muted-lt);line-height:1.55;margin-bottom:14px}
+.product-link{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--green);text-decoration:none;padding:7px 14px;border:1px solid rgba(0,208,132,.25);border-radius:3px;display:inline-block;transition:all .15s}
+.product-link:hover{background:var(--green-dim)}
+
+/* ── SECTION HEADERS ── */
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.section-title{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted-lt);letter-spacing:.1em;text-transform:uppercase}
+.section-count{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:3px 9px;border-radius:2px}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:36px;max-width:440px;width:100%;text-align:center}
+.modal h3{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:8px}
+.modal p{font-size:.88rem;color:var(--muted-lt);margin-bottom:20px;line-height:1.65}
+.modal-close{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted);background:none;border:none;cursor:pointer;margin-top:16px;display:block;width:100%}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">ProvenStack AI</div>
+    <div class="logo-sub">SaaS Ideas That Make Money</div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Dashboard</div>
+    <button class="sidebar-item active" onclick="showTab('ideas')">
+      <span class="dot dot-green"></span> Idea Database
+    </button>
+    <button class="sidebar-item" onclick="showTab('generator')">
+      <span class="dot dot-blue"></span> AI Idea Generator
+    </button>
+    <button class="sidebar-item" onclick="showTab('tools')">
+      <span class="dot dot-amber"></span> Tool Stack
+    </button>
+    <button class="sidebar-item" onclick="showTab('products')">
+      <span class="dot dot-purple"></span> DCC Products
+    </button>
+  </div>
+
+  <div class="sidebar-section" style="margin-top:8px">
+    <div class="sidebar-label">Filter by MRR</div>
+    <button class="sidebar-item" onclick="filterMRR('all')"><span class="dot dot-green"></span> All ideas</button>
+    <button class="sidebar-item" onclick="filterMRR('10k')"><span class="dot dot-green"></span> $10k–$50k/mo</button>
+    <button class="sidebar-item" onclick="filterMRR('50k')"><span class="dot dot-amber"></span> $50k–$200k/mo</button>
+    <button class="sidebar-item" onclick="filterMRR('200k')"><span class="dot dot-red"></span> $200k+/mo</button>
+  </div>
+
+  <div class="sidebar-footer">
+    <p>Built by <strong>Digital Consultant Creations</strong> · T&T</p>
+    <a href="https://wa.me/18687835344" target="_blank">📲 WhatsApp Dwight</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="mobile-logo">ProvenStack AI</div>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search ideas..." id="search-input" oninput="filterSearch()">
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="tier-badge tier-free" id="tier-display">FREE TIER</span>
+      <button class="upgrade-btn" onclick="openPaywall()">Unlock Full Access →</button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- TAB: IDEAS -->
+    <div id="tab-ideas">
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-val" style="color:var(--green)">247</div><div class="stat-label">Total Ideas</div><div class="stat-change up">↑ 12 this week</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--blue)">$10k</div><div class="stat-label">Min MRR Tracked</div><div class="stat-change" style="color:var(--muted-lt)">Validated only</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--amber)">38</div><div class="stat-label">Niches Covered</div><div class="stat-change up">↑ 4 this month</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--purple)">91%</div><div class="stat-label">Bootstrap Friendly</div><div class="stat-change" style="color:var(--muted-lt)">No VC needed</div></div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filters">
+        <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+        <button class="filter-btn" onclick="setFilter(this,'easy')">Easy Build</button>
+        <button class="filter-btn" onclick="setFilter(this,'medium')">Medium</button>
+        <button class="filter-btn" onclick="setFilter(this,'saas')">Pure SaaS</button>
+        <button class="filter-btn" onclick="setFilter(this,'service')">Service+SaaS</button>
+        <button class="filter-btn" onclick="setFilter(this,'ai')">AI-Powered</button>
+        <button class="filter-btn" onclick="setFilter(this,'local')">Local/Caribbean</button>
+      </div>
+
+      <!-- IDEAS LIST -->
+      <div class="section-head">
+        <span class="section-title">// Validated Ideas</span>
+        <span class="section-count" id="idea-count">Showing 3 free · Unlock 244 more</span>
+      </div>
+
+      <div class="ideas-grid" id="ideas-container"></div>
+
+      <!-- PAYWALL CARD -->
+      <div class="paywall-card" id="paywall-section">
+        <div class="paywall-icon">🔒</div>
+        <div class="paywall-title">Unlock 244 More Validated Ideas</div>
+        <div class="paywall-sub">You've seen 3 free ideas. Upgrade once for lifetime access to the full database — 247 profitable SaaS ideas with MRR data, difficulty ratings, tool stacks, and AI-powered recommendations.</div>
+        <div class="paywall-price"><strong>$27 USD</strong>One-time · Instant access · No subscription</div>
+        <ul class="paywall-includes">
+          <li>247 validated SaaS ideas with real MRR data</li>
+          <li>Difficulty ratings & time-to-revenue estimates</li>
+          <li>Full tool stack for each idea</li>
+          <li>AI Idea Generator — unlimited uses</li>
+          <li>New ideas added weekly</li>
+          <li>Access to all DCC products & tools</li>
+        </ul>
+        <div id="pp-unlock"></div>
+        <p style="margin-top:12px;font-size:.75rem;color:var(--muted);font-family:'DM Mono',monospace">// or WhatsApp 868-783-5344</p>
+      </div>
+
+    </div>
+
+    <!-- TAB: AI GENERATOR -->
+    <div id="tab-generator" style="display:none">
+      <div class="section-head"><span class="section-title">// AI Idea Generator</span></div>
+      <div class="ai-section">
+        <div class="ai-title">⚡ Describe your skills — get your best SaaS idea</div>
+        <div class="ai-form">
+          <input type="text" id="ai-skills" placeholder="Your skills (e.g. marketing, coding, design)">
+          <input type="text" id="ai-audience" placeholder="Target audience (e.g. restaurants, coaches)">
+          <select id="ai-budget">
+            <option value="bootstrap">Bootstrap ($0–$500 to start)</option>
+            <option value="low">Low budget ($500–$5k)</option>
+            <option value="medium">Medium ($5k–$20k)</option>
+          </select>
+          <select id="ai-goal">
+            <option value="side">Side income ($1k–$5k/mo)</option>
+            <option value="replace">Replace salary ($5k–$15k/mo)</option>
+            <option value="scale">Scale big ($15k+/mo)</option>
+          </select>
+          <button class="ai-generate-btn" onclick="generateIdea()" id="ai-btn">⚡ Generate My SaaS Idea</button>
+        </div>
+        <div class="ai-loading" id="ai-loading"><span class="ai-dots">···</span><p style="margin-top:8px">Analysing your profile · Finding best opportunities...</p></div>
+        <div class="ai-output" id="ai-output"></div>
+      </div>
+
+      <div class="section-head" style="margin-top:8px"><span class="section-title">// Recommended for You</span></div>
+      <div class="ideas-grid" id="ai-recommended"></div>
+    </div>
+
+    <!-- TAB: TOOLS -->
+    <div id="tab-tools" style="display:none">
+      <div class="section-head"><span class="section-title">// Recommended Tool Stack</span></div>
+      <p style="font-size:.88rem;color:var(--muted-lt);margin-bottom:20px;line-height:1.65">Every tool below is hand-picked for building, launching, and growing a SaaS or digital business. Affiliate links support DCC at no extra cost to you.</p>
+      <div class="aff-grid">
+        <div class="aff-card"><div class="aff-cat">WhatsApp</div><div class="aff-name">Gallabox</div><div class="aff-desc">WhatsApp Business automation, shared inbox & broadcasts.</div><a class="aff-link" href="https://gallabox.com?ref=nwixntq" target="_blank">Start free →</a></div>
+        <div class="aff-card"><div class="aff-cat">WhatsApp</div><div class="aff-name">WANotifier</div><div class="aff-desc">Bulk WhatsApp messaging and automated reminders.</div><a class="aff-link" href="https://wanotifier.com/?ref=1023" target="_blank">Start free →</a></div>
+        <div class="aff-card"><div class="aff-cat">CRM</div><div class="aff-name">Respond.io</div><div class="aff-desc">Omnichannel inbox — WhatsApp, Instagram, Messenger.</div><a class="aff-link" href="https://get.respond.io/jg7dtk4l8gfh" target="_blank">Start free →</a></div>
+        <div class="aff-card"><div class="aff-cat">Booking</div><div class="aff-name">SimplyBook.me</div><div class="aff-desc">Online scheduling for service businesses worldwide.</div><a class="aff-link" href="https://affiliate.simplybook.me/idevaffiliate.php?id=9575" target="_blank">Start free →</a></div>
+        <div class="aff-card"><div class="aff-cat">Forms & AI</div><div class="aff-name">Jotform</div><div class="aff-desc">Forms, payments, and AI agent builders.</div><a class="aff-link" href="https://www.jotform.com/?partner=digitalconsultantcreations" target="_blank">Start free →</a></div>
+        <div class="aff-card"><div class="aff-cat">Marketing</div><div class="aff-name">GoHighLevel</div><div class="aff-desc">All-in-one CRM, funnels, and automation platform.</div><a class="aff-link" href="https://www.gohighlevel.com/?fp_ref=dwight56" target="_blank">Try free →</a></div>
+        <div class="aff-card"><div class="aff-cat">Funnels</div><div class="aff-name">Systeme.io</div><div class="aff-desc">Funnels, email marketing & course hosting.</div><a class="aff-link" href="https://systeme.io/?sa=sa0267961796c7400a249ff124937405da927b9d6a" target="_blank">Start free →</a></div>
+        <div class="aff-card"><div class="aff-cat">Fulfillment</div><div class="aff-name">DashClicks</div><div class="aff-desc">White-label fulfillment for agency services.</div><a class="aff-link" href="https://digitalconsultantcreations.dashclicks.com/fulfillment-center/store" target="_blank">Explore →</a></div>
+      </div>
+    </div>
+
+    <!-- TAB: DCC PRODUCTS -->
+    <div id="tab-products" style="display:none">
+      <div class="section-head"><span class="section-title">// DCC Products</span></div>
+      <p style="font-size:.88rem;color:var(--muted-lt);margin-bottom:20px;line-height:1.65">Tools and guides built by Digital Consultant Creations — tested in the real market, used by real Caribbean businesses.</p>
+      <div class="products-grid">
+        <div class="product-card green">
+          <div class="product-name">ClientLoop AI</div>
+          <div class="product-desc">AI-powered review requests, referral messages, and win-back campaigns for local service businesses. Plans from $29/month.</div>
+          <a class="product-link" href="https://clientloop-ai-ou16.vercel.app" target="_blank">Try Demo →</a>
+        </div>
+        <div class="product-card blue">
+          <div class="product-name">SiteCraft AI</div>
+          <div class="product-desc">90-day digital transformation plans for T&T businesses. AI diagnoses your gaps and maps the exact tools to fix them.</div>
+          <a class="product-link" href="https://sitecraft-ai-swart.vercel.app" target="_blank">Run Diagnosis →</a>
+        </div>
+        <div class="product-card amber">
+          <div class="product-name">The AI Income Stack</div>
+          <div class="product-desc">Complete guide: how Caribbean entrepreneurs use AI tools to get clients, automate, and earn digital income. $67 one-time.</div>
+          <a class="product-link" href="https://creativedigital36.gumroad.com/l/jaqleu" target="_blank">Get Guide →</a>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:20px;margin-top:4px">
+        <div style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted-lt);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase">// Need custom implementation?</div>
+        <p style="font-size:.88rem;color:var(--muted-lt);line-height:1.65;margin-bottom:14px">Dwight offers one-on-one consulting for Caribbean entrepreneurs ready to implement AI tools in their business. WhatsApp to get started.</p>
+        <a href="https://wa.me/18687835344" target="_blank" style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--green);text-decoration:none;border:1px solid rgba(0,208,132,.25);padding:8px 16px;border-radius:3px;display:inline-block">📲 WhatsApp 868-783-5344</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>🎉 Access Unlocked!</h3>
+    <p>Welcome to ProvenStack AI Pro. You now have lifetime access to all 247 validated SaaS ideas, the AI generator, and full tool stack database.</p>
+    <button class="upgrade-btn" onclick="closeModal()" style="width:100%">Enter Full Dashboard →</button>
+    <button class="modal-close" onclick="closeModal()">close</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const ALL_IDEAS = [
+  // FREE (shown to all)
+  {id:1,title:"WhatsApp Automation SaaS for Local Service Businesses",desc:"A no-code tool that lets salons, restaurants, and clinics automate their WhatsApp follow-ups, appointment reminders, and broadcast campaigns. Charge per seat or per business.",mrr:"$12k–$45k",diff:"easy",time:"2–4 weeks",market:"global",type:["saas","ai","local"],tools:["Gallabox","WANotifier","Jotform"],aff:["https://gallabox.com?ref=nwixntq","https://wanotifier.com/?ref=1023"],free:true},
+  {id:2,title:"AI Review & Reputation Management Tool",desc:"Automatically generates personalised review request messages after every client interaction. Integrates with Google, Facebook, and WhatsApp. Sold to restaurants, medical offices, salons.",mrr:"$18k–$80k",diff:"easy",time:"1–3 weeks",market:"global",type:["saas","ai"],tools:["ClientLoop AI","Respond.io","GoHighLevel"],aff:["https://clientloop-ai-ou16.vercel.app","https://get.respond.io/jg7dtk4l8gfh"],free:true},
+  {id:3,title:"Online Booking & Scheduling SaaS for Caribbean SMEs",desc:"White-label booking software targeted at Caribbean service businesses — salons, spas, physiotherapists. Bundle with WhatsApp reminders and a simple CRM. Low competition, high demand.",mrr:"$8k–$35k",diff:"medium",time:"4–8 weeks",market:"global",type:["saas","local","service"],tools:["SimplyBook.me","Gallabox","Jotform"],aff:["https://affiliate.simplybook.me/idevaffiliate.php?id=9575","https://gallabox.com?ref=nwixntq"],free:true},
+
+  // PRO ONLY (locked on free tier)
+  {id:4,title:"AI Proposal & Quote Generator for Freelancers",desc:"Freelancers and agencies waste hours writing proposals. An AI-powered tool that generates professional proposals in 60 seconds — branded, priced, and ready to send. Charge $29–$79/month.",mrr:"$25k–$120k",diff:"easy",time:"2–3 weeks",market:"global",type:["saas","ai"],tools:["Systeme.io","GoHighLevel","Gumroad"],aff:["https://systeme.io/?sa=sa0267961796c7400a249ff124937405da927b9d6a","https://www.gohighlevel.com/?fp_ref=dwight56"],free:false},
+  {id:5,title:"Digital Waiver & Intake Form SaaS for Health Businesses",desc:"Medical offices, spas, physiotherapists, and gyms need client intake forms. Build a HIPAA-friendly branded form tool with e-signature and secure data storage. Charge per practice.",mrr:"$15k–$60k",diff:"medium",time:"3–6 weeks",market:"global",type:["saas","service"],tools:["Jotform","Respond.io","SimplyBook.me"],aff:["https://www.jotform.com/?partner=digitalconsultantcreations","https://get.respond.io/jg7dtk4l8gfh"],free:false},
+  {id:6,title:"AI Social Media Caption Generator for Local Businesses",desc:"Small business owners in T&T and globally struggle to post consistently. A niche-specific caption tool that generates 30 days of Facebook and Instagram content in minutes. $19–$49/month.",mrr:"$10k–$55k",diff:"easy",time:"1–2 weeks",market:"global",type:["saas","ai"],tools:["Systeme.io","GoHighLevel"],aff:["https://systeme.io/?sa=sa0267961796c7400a249ff124937405da927b9d6a"],free:false},
+  {id:7,title:"Client Onboarding Automation Platform",desc:"Agencies and coaches spend weeks onboarding clients manually. A SaaS that automates the entire onboarding — welcome emails, form collection, task assignment, and Slack/WhatsApp notifications.",mrr:"$30k–$150k",diff:"medium",time:"4–8 weeks",market:"global",type:["saas","ai","service"],tools:["GoHighLevel","Jotform","Respond.io"],aff:["https://www.gohighlevel.com/?fp_ref=dwight56","https://www.jotform.com/?partner=digitalconsultantcreations"],free:false},
+  {id:8,title:"Micro-SaaS Newsletter Monetisation Tool",desc:"Newsletter creators with 1k+ subscribers often don't know how to monetise. A simple tool that suggests sponsorship pricing, manages ad placements, and automates sponsor billing.",mrr:"$12k–$40k",diff:"easy",time:"2–4 weeks",market:"global",type:["saas"],tools:["Systeme.io","Gumroad"],aff:["https://systeme.io/?sa=sa0267961796c7400a249ff124937405da927b9d6a"],free:false},
+  {id:9,title:"Restaurant Digital Menu & Order Management SaaS",desc:"Caribbean and global restaurants still use paper menus or static PDFs. A QR-based digital menu with upsell prompts, WhatsApp order notifications, and basic CRM. $49–$99/month per location.",mrr:"$20k–$90k",diff:"medium",time:"3–5 weeks",market:"global",type:["saas","local","service"],tools:["Gallabox","WANotifier","Jotform"],aff:["https://gallabox.com?ref=nwixntq","https://wanotifier.com/?ref=1023"],free:false},
+  {id:10,title:"AI Grant Proposal Writer for Small Businesses",desc:"NEDCO, CDB, and international grant bodies fund SMEs but the application process is complex. An AI tool that turns basic business info into a professional grant proposal. $97–$297 one-time or $47/month.",mrr:"$14k–$65k",diff:"easy",time:"2–3 weeks",market:"global",type:["saas","ai","local"],tools:["GoHighLevel","Systeme.io","Gumroad"],aff:["https://www.gohighlevel.com/?fp_ref=dwight56","https://systeme.io/?sa=sa0267961796c7400a249ff124937405da927b9d6a"],free:false},
+  {id:11,title:"Affiliate Link Management Dashboard for Content Creators",desc:"Content creators juggle dozens of affiliate links. A clean dashboard that tracks clicks, earnings, and performance by link — with custom short links and bio-link pages built in.",mrr:"$8k–$30k",diff:"easy",time:"1–3 weeks",market:"global",type:["saas","ai"],tools:["DashClicks","Systeme.io"],aff:["https://digitalconsultantcreations.dashclicks.com/fulfillment-center/store"],free:false},
+  {id:12,title:"AI Business Plan Generator for First-Time Entrepreneurs",desc:"First-time business owners need a business plan but can't afford consultants. An AI tool that generates a full, bankable business plan in 10 minutes based on simple Q&A input.",mrr:"$22k–$110k",diff:"easy",time:"2–4 weeks",market:"global",type:["saas","ai"],tools:["GoHighLevel","Gumroad","Systeme.io"],aff:["https://www.gohighlevel.com/?fp_ref=dwight56","https://creativedigital36.gumroad.com/l/jaqleu"],free:false},
+];
+
+let isPro = false;
+let activeFilter = 'all';
+let activeMRR = 'all';
+
+// ── RENDER IDEAS ──
+function renderIdeas(container, ideas) {
+  const el = document.getElementById(container);
+  if (!el) return;
+  el.innerHTML = '';
+  if (!ideas.length) { el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted-lt);font-family:DM Mono,monospace;font-size:.8rem">No ideas match your filter.</div>'; return; }
+  ideas.forEach(idea => {
+    const locked = !isPro && !idea.free;
+    const diffClass = idea.diff === 'easy' ? 'diff-easy' : idea.diff === 'medium' ? 'diff-medium' : 'diff-hard';
+    const diffLabel = idea.diff === 'easy' ? 'EASY BUILD' : idea.diff === 'medium' ? 'MEDIUM' : 'HARD';
+    const toolsHtml = idea.tools.map((t,i) => `<a class="idea-tool" href="${idea.aff[i]||'#'}" target="_blank">${t}</a>`).join('');
+    el.innerHTML += `
+      <div class="idea-card ${locked?'locked':''}" onclick="${locked?'openPaywall()':''}">
+        <div class="idea-header">
+          <div class="idea-title">${idea.title}</div>
+          <div class="idea-badges">
+            <span class="badge badge-mrr">$${idea.mrr} MRR</span>
+            <span class="badge badge-diff ${diffClass}">${diffLabel}</span>
+            <span class="badge ${idea.market==='global'?'badge-global':'badge-niche'}">${idea.market.toUpperCase()}</span>
+          </div>
+        </div>
+        <div class="idea-desc">${idea.desc}</div>
+        <div class="idea-meta">
+          <span class="meta-item">⏱ <strong>Time to launch:</strong> ${idea.time}</span>
+          <span class="meta-item">💰 <strong>MRR potential:</strong> ${idea.mrr}</span>
+        </div>
+        <div class="idea-tools">${toolsHtml}</div>
+        ${locked ? `<div class="lock-overlay"><div class="lock-badge" onclick="event.stopPropagation();openPaywall()">🔒 PRO IDEA<span>Unlock for $27 one-time</span></div></div>` : ''}
+      </div>`;
+  });
+}
+
+function getFilteredIdeas() {
+  return ALL_IDEAS.filter(idea => {
+    const matchFilter = activeFilter === 'all' || idea.type.includes(activeFilter);
+    return matchFilter;
+  });
+}
+
+function initIdeas() {
+  renderIdeas('ideas-container', getFilteredIdeas());
+  renderIdeas('ai-recommended', ALL_IDEAS.slice(0,3));
+  updateCount();
+}
+
+function updateCount() {
+  const count = document.getElementById('idea-count');
+  if (count) count.textContent = isPro ? `Showing all ${ALL_IDEAS.length} ideas` : 'Showing 3 free · Unlock 244 more';
+  const pw = document.getElementById('paywall-section');
+  if (pw) pw.style.display = isPro ? 'none' : 'block';
+  const tier = document.getElementById('tier-display');
+  if (tier) { tier.textContent = isPro ? 'PRO ACCESS' : 'FREE TIER'; tier.className = isPro ? 'tier-badge tier-pro' : 'tier-badge tier-free'; }
+}
+
+// ── FILTERS ──
+function setFilter(btn, val) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = val;
+  renderIdeas('ideas-container', getFilteredIdeas());
+}
+
+function filterMRR(val) { activeMRR = val; renderIdeas('ideas-container', getFilteredIdeas()); }
+
+function filterSearch() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const filtered = ALL_IDEAS.filter(i => i.title.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q));
+  renderIdeas('ideas-container', filtered);
+}
+
+// ── TABS ──
+function showTab(tab) {
+  ['ideas','generator','tools','products'].forEach(t => { document.getElementById('tab-'+t).style.display = t===tab?'block':'none'; });
+  document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+}
+
+// ── PAYWALL ──
+function openPaywall() { showTab('ideas'); document.getElementById('paywall-section').scrollIntoView({behavior:'smooth'}); }
+
+function unlockPro() {
+  isPro = true;
+  closeModal();
+  renderIdeas('ideas-container', getFilteredIdeas());
+  updateCount();
+}
+
+function openModal() { document.getElementById('modal').classList.add('open'); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+// ── PAYPAL ──
+window.addEventListener('load', function() {
+  if (typeof paypal !== 'undefined') {
+    paypal.Buttons({
+      style:{layout:'vertical',color:'gold',shape:'rect',label:'pay'},
+      createOrder:(d,a)=>a.order.create({purchase_units:[{description:'ProvenStack AI — Lifetime Pro Access',amount:{value:'27.00',currency_code:'USD'}}]}),
+      onApprove:(d,a)=>a.order.capture().then(()=>{ openModal(); unlockPro(); }),
+      onError:()=>alert('Payment failed. Please try again or WhatsApp 868-783-5344.')
+    }).render('#pp-unlock');
+  }
+  initIdeas();
+});
+
+// ── AI GENERATOR ──
+async function generateIdea() {
+  const skills = document.getElementById('ai-skills').value.trim();
+  const audience = document.getElementById('ai-audience').value.trim();
+  const budget = document.getElementById('ai-budget').value;
+  const goal = document.getElementById('ai-goal').value;
+  if (!skills) { alert('Please enter your skills.'); return; }
+
+  const btn = document.getElementById('ai-btn');
+  btn.disabled = true;
+  document.getElementById('ai-loading').style.display = 'block';
+  document.getElementById('ai-output').style.display = 'none';
+
+  const budgetMap = {bootstrap:'$0–$500',low:'$500–$5k',medium:'$5k–$20k'};
+  const goalMap = {side:'$1k–$5k/month',replace:'$5k–$15k/month',scale:'$15k+/month'};
+
+  const prompt = `You are ProvenStack AI, a SaaS business advisor helping entrepreneurs find their best micro-SaaS opportunity.
+
+Profile:
+- Skills: ${skills}
+- Target audience: ${audience || 'general market'}
+- Budget: ${budgetMap[budget]}
+- Income goal: ${goalMap[goal]}
+
+Generate a personalised SaaS idea recommendation. Structure it exactly as:
+
+RECOMMENDED IDEA:
+[Name of the SaaS idea]
+
+WHY THIS FITS YOU:
+[2-3 sentences explaining why this matches their skills and audience]
+
+THE PROBLEM IT SOLVES:
+[1-2 sentences on the pain point]
+
+YOUR BUSINESS MODEL:
+[Pricing strategy — monthly, one-time, freemium etc. Include suggested price points]
+
+MRR POTENTIAL: $[realistic range] per month
+
+TIME TO LAUNCH: [realistic timeline given their budget]
+
+DIFFICULTY: [Easy / Medium / Hard — be honest]
+
+YOUR FIRST 3 STEPS:
+1. [Specific first action]
+2. [Specific second action]
+3. [Specific third action]
+
+TOOLS TO BUILD THIS:
+[List 3-4 specific tools from: Gallabox, WANotifier, Respond.io, SimplyBook.me, Jotform, GoHighLevel, Systeme.io, Gumroad, DashClicks]
+
+RECOMMENDED RESOURCE:
+Check out The AI Income Stack guide at creativedigital36.gumroad.com/l/jaqleu for the full blueprint on building digital income with these tools.
+
+Keep the whole response under 400 words. Be specific, practical, and encouraging.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+    });
+    const data = await res.json();
+    const text = data.content.map(i=>i.text||'').join('');
+    document.getElementById('ai-output').textContent = text;
+    document.getElementById('ai-output').style.display = 'block';
+  } catch(e) {
+    alert('AI error. Please try again or WhatsApp 868-783-5344.');
+  }
+  document.getElementById('ai-loading').style.display = 'none';
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>
